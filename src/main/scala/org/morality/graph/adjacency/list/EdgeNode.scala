@@ -1,10 +1,10 @@
 package org.morality.graph.adjacency.list
 
-class EdgeNode[T](value: T, y: Int, weight: Option[Int]) {
+class EdgeNode(val y: Int, val weight: Option[Int], val next: Option[EdgeNode] = None) {
 
 
   override def toString(): String = {
-    s"$y:${value.toString}"
+    s"$y"
   }
 
 }

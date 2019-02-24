@@ -6,7 +6,7 @@ import scala.io.Source
 
 class AdjacencyListGraphSpec extends FlatSpec {
 
-  def readGraphFromFile(fileName: String): AdjacencyListGraph[String] = {
+  def readGraphFromFile(fileName: String): AdjacencyListGraph = {
     val bufferedSource = Source.fromResource(fileName)
     val wroteSource: Seq[Array[Int]] = bufferedSource.getLines().map { line =>
       line.split('|').map(_.toInt)
@@ -21,7 +21,7 @@ class AdjacencyListGraphSpec extends FlatSpec {
     var graph = AdjacencyListGraph[String](nVertices, nEdges, directed = false)
     var counter = 0
     edgeLines.foreach { line =>
-      graph = graph.insertEdge("node", line(0), line(1), None, directedInsert = false)
+      graph = graph.insertEdge(line(0), line(1), None, directedInsert = false)
       counter = counter + 1
     }
     bufferedSource.close
@@ -34,6 +34,12 @@ class AdjacencyListGraphSpec extends FlatSpec {
   "printGraph" should "printGraph and terminate" in {
     val graph = readGraphFromFile("test_graph_1.txt")
     graph.printGraph()
+    assert(true)
+  }
+
+  "bfs" should "shouldn't fail" in {
+    val graph = readGraphFromFile("test_graph_1.txt")
+    graph.bfs()
     assert(true)
   }
 
